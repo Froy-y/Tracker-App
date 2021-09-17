@@ -15,10 +15,15 @@ def about(request):
 def content(request):
     content_ = Content.objects.all()
     return render(request, 'content/index.html', {
-        'content': content_
+        'content_': content_
     })
 
 #detail (show)
+def content_detail(request, content_id):
+    content_ = Content.objects.get(id=content_id)
+    return render(request, 'content/detail.html', {
+        'content_': content_
+    })
 
 #create
 

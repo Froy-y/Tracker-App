@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Content Details</h1>
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    {{content_.name}}
+                </span>
+                <p>
+                    Description: {{content_.description}}
+                </p>
+                <br />
+                <p>
+                    Seasons: {{content_.seasons}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

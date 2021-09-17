@@ -2,6 +2,7 @@
 {% block content %}
 <h1>Content</h1>
 {% for cont in content_ %}
+<a href="{% url 'detail' cont.id %}">
 <div class="card">
     <div class="card-content">
         <span class="card-title">
@@ -9,10 +10,13 @@
         </span>
         <p>
             Description: {{cont.description}}
-            Seasons: {{cont.season}}
+        </p>
+        <p>
+            Seasons: {{cont.seasons}}
         </p>
     </div>
 </div>
+</a>
 {% endfor %}
 
 {% endblock %}

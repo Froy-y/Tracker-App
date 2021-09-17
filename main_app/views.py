@@ -1,5 +1,6 @@
+from django.db.models import fields
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Content
 
@@ -21,9 +22,9 @@ def content(request):
 
 #detail (show)
 def content_detail(request, content_id):
-    content_ = Content.objects.get(id=content_id)
+    cont = Content.objects.get(id=content_id)
     return render(request, 'content/detail.html', {
-        'content_': content_
+        'cont': cont
     })
 
 #create
@@ -38,7 +39,10 @@ class ContentUpdate(UpdateView):
         
 
 #delete
-
+class ContentDelete(DeleteView):
+    model = Content
+    success_url = '/content/'
+        
 
 #one to one
 

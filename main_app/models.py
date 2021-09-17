@@ -11,5 +11,4 @@ class Content(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return reverse("detail", kwargs={"content_id": self.id})
-    
+        return reverse('detail', kwargs={'content_id': self.id})

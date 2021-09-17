@@ -6,18 +6,19 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">
-                    {{content_.name}}
+                    {{cont.name}}
                 </span>
                 <p>
-                    Description: {{content_.description}}
+                    Description: {{cont.description}}
                 </p>
                 <br />
                 <p>
-                    Seasons: {{content_.seasons}}
+                    Seasons: {{cont.seasons}}
                 </p>
             </div>
             <div class="card-action">
-                <a href="{% url 'content_update' content_.id %}">Edit</a>
+                <a href="{% url 'content_update' cont.id %}">Edit</a>
+                <a href="{% url 'content_delete' cont.id %}">Delete</a>
             </div>
         </div>
     </div>

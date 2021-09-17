@@ -3,7 +3,7 @@
 
 {% if object %}
     <h1>
-        Edit<span class="teal-text">{{object.name}}!</span>
+        Edit <span class="teal-text">{{ object.name }}!</span>
     </h1>
 {% else %}
     <h1>
@@ -14,7 +14,7 @@
 <form action="" method="post">
     {% csrf_token %}
     <table>
-        {{form.as_table}}
+        {{ form.as_table }}
     </table>
     {% if object %}
     <input type="submit" value="Submit!" class="btn-large">

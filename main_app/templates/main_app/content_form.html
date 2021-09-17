@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if object %}
+    <h1>
+        Edit<span class="teal-text">{{object.name}}!</span>
+    </h1>
+{% else %}
+    <h1>
+        Create Content!
+    </h1>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    {% if object %}
+    <input type="submit" value="Submit!" class="btn-large">
+    {% else %}
+    <input type="submit" value="Submit!" class="btn-large">
+    {% endif %}
+    <a href="{% url 'content' %}" value="Submit!" class="btn-large">Back to Content</a>
+</form>
+
+{% endblock %}

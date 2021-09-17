@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 
 from .models import Content
 
@@ -26,6 +27,9 @@ def content_detail(request, content_id):
     })
 
 #create
+class ContentCreate(CreateView):
+    model = Content
+    fields= '__all__'
 
 #update
 

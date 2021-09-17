@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Content
 
@@ -32,8 +32,13 @@ class ContentCreate(CreateView):
     fields= '__all__'
 
 #update
+class ContentUpdate(UpdateView):
+    model = Content
+    fields = ['name', 'description', 'seasons']
+        
 
 #delete
+
 
 #one to one
 

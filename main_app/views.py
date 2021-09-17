@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from .models import Content
+
 # Create your views here.
 #home
 def home(request):
@@ -10,6 +12,11 @@ def about(request):
     return render(request, 'about.html')
 
 #index
+def content(request):
+    content_ = Content.objects.all()
+    return render(request, 'content/index.html', {
+        'content': content_
+    })
 
 #detail (show)
 

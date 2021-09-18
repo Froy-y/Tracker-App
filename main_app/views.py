@@ -95,7 +95,9 @@ class PlatformCreate(CreateView):
     fields = '__all__'
 
 #update
-
+class PlatformUpdate(UpdateView):
+    model = Platform
+    fields = '__all__'
 
 #delete
 

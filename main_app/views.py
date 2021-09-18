@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
@@ -100,7 +99,9 @@ class PlatformUpdate(UpdateView):
     fields = '__all__'
 
 #delete
-
+class PlatformDelete(DeleteView):
+    model = Platform
+    success_url = '/platforms'
 
 #associations
 #assoc

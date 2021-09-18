@@ -37,7 +37,6 @@
             Bored? Let's watch some episodes!!
         </div>
         {% endif %}
-
         <table class="striped">
             {% if cont.entry_set.all %}
                 <thead>
@@ -47,11 +46,18 @@
                 </thead>
                 <tbody>
                     {% for entry in cont.entry_set.all %}
-                    <tr>
-                        <td>{{entry.date}}</td>
-                        <td>{{entry.season}}</td>
-                        <td>{{entry.episode}}</td>
-                    </tr>
+                        <tr>
+                            <td>{{entry.date}}</td>
+                            <td>{{entry.season}}</td>
+                            <td>{{entry.episode}}
+                            <div class="card-action">
+                                <form action="{% url 'delete_entry' cont.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn">Remove</button>
+                                </form>
+                            </div>
+                            </td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             {% endif %}

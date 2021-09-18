@@ -1,3 +1,4 @@
+from django.db.models import fields
 from django.forms import ModelForm
 from .models import Entry
 from django.urls import reverse
@@ -9,3 +10,8 @@ class EntryForm(ModelForm):
         
     def get_absolute_url(self):
         return reverse('detail', kwargs={'content_id': self.id})
+    
+class DeleteEntry(ModelForm):
+    class Meta:
+        model=Entry
+        fields= []

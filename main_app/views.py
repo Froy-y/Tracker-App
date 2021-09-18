@@ -1,8 +1,8 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Content
-from .forms import EntryForm
+from .models import Content, Entry
+from .forms import EntryForm, DeleteEntry
 
 # Create your views here.
 #home
@@ -47,6 +47,7 @@ class ContentDelete(DeleteView):
         
 
 #one to one
+#create
 def add_entry(request, content_id):
     form = EntryForm(request.POST)
     if form.is_valid():
@@ -54,6 +55,28 @@ def add_entry(request, content_id):
         new_entry.content_id = content_id
         new_entry.save()
     return redirect('detail', content_id=content_id)
+
+# delete
+def delete_entry(request, content_id):
+    entry = Entry.objects.get(content_id=content_id)
+    form = DeleteEntry(request.POST)
+    if form.is_valid():
+        entry.delete()
+    return redirect('detail', content_id=content_id)
+
+# def delete_entry(request, content_id):
+#     entry = get_object_or_404(Entry, content_id=content_id)
+#     if request.method == "POST":
+#         form = DeleteEntry(request.POST, instance=entry)
+#         if form.is_valid:
+#             entry.delete()
+#             return redirect('detail')
+#     else:
+#         form = DeleteEntry(instance=entry)
+#     return render(request, 'detail', {
+#         'form': form,
+#         'entry': entry
+#     })
 
 #many to many -classes-
 #index

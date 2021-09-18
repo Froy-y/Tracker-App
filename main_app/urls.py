@@ -17,4 +17,5 @@ urlpatterns = [
     path('platforms/create/', views.PlatformCreate.as_view(), name='platform_create'),
     path('platforms/<int:pk>/update', views.PlatformUpdate.as_view(), name='platform_update'),
     path('platforms/<int:pk>/delete', views.PlatformDelete.as_view(), name='platform_delete'),
+    path('content/<int:content_id>/assoc_platform/<int:platform_id>/', views.assoc_platform, name='assoc_platform'),
 ]

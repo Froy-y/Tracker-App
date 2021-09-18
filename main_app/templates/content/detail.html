@@ -64,6 +64,49 @@
         </table>
     </div>
 </div>
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>
+            {{ cont.name }}'s Streaming Platforms
+        </h3>
+        {% if cont.platform.count %}
+            {% for plat in cont.platform.all %}
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <span>{{ plat.name }}</span>
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h5>No Platforms :(</h5>
+        {% endif %}
+    </div>
+    <div class="col s6">
+        <h3>Avaliable Platforms</h3>
+        {% if platforms.count %}
+            {% for plat in platforms.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">
+                            A <span>{{ plat.name }}</span>
+                        </span>
+                    </div>
+                    <div class="card-action">
+                        <form action="{% url 'assoc_platform' cont.id plat.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Add</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5>{{cont.name}} Already Has All Platforms Avaliable</h5>
+        {% endif %}
+    </div>
+</div>
 <script>
     const dateEl = document.getElementById("id_date");
     M.Datepicker.init(dateEl, {

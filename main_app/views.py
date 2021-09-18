@@ -23,11 +23,13 @@ def content(request):
 
 #detail (show)
 def content_detail(request, content_id):
-    cont = Content.objects.get(id=content_id)
+    content = Content.objects.get(id=content_id)
+    platforms_content_doesnt_have = Platform.objects.exclude(id__in = content.platform.all().values_list('id'))
     entry_form = EntryForm()
     return render(request, 'content/detail.html', {
-        'cont': cont,
-        'entry_form': entry_form
+        'cont': content,
+        'entry_form': entry_form,
+        'platforms': platforms_content_doesnt_have
     })
 
 #create
@@ -105,8 +107,10 @@ class PlatformDelete(DeleteView):
 
 #associations
 #assoc
-
-
+def assoc_platform(request, content_id, platform_id):
+    Content.objects.get(id=content_id).platform.add(platform_id)
+    return redirect('detail', content_id=content_id)
+    
 #unassoc
 
 

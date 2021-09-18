@@ -7,7 +7,10 @@ class Platform(models.Model):
         
     def __str__(self):
         return self.name
-
+    
+    def get_absolute_url(self):
+        return reverse("platform_detail", kwargs={"pk": self.id})
+    
 
 # Create your models here.
 class Content(models.Model):

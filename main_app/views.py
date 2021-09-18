@@ -1,7 +1,7 @@
-from typing import List
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Content, Entry, Platform
 from .forms import EntryForm, DeleteEntry
@@ -86,7 +86,8 @@ class PlatformList(ListView):
     model = Platform
 
 #detail (show)
-
+class PlatformDetail(DetailView):
+    model = Platform
 
 #create
 

@@ -21,4 +21,5 @@ urlpatterns = [
     path('content/<int:content_id>/assoc_platform/<int:platform_id>/', views.assoc_platform, name='assoc_platform'),
     path('content/<int:content_id>/unassoc_platform/<int:platform_id>/', views.unassoc_platform, name='unassoc_platform'),
     path('content/<int:content_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('content/<int:content_id>/delete_photo/', views.delete_photo, name='delete_photo',)
 ]

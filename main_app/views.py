@@ -1,9 +1,14 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
-from .models import Content, Entry, Platform
+from .models import Content, Entry, Platform, Photo
 from .forms import EntryForm, DeleteEntry
+
+import os
+import uuid
+import boto3
+import botocore.exceptions
 
 # Create your views here.
 #home
@@ -117,6 +122,31 @@ def unassoc_platform(request, content_id, platform_id):
     return redirect('detail', content_id=content_id)    
 
 #photo -aws-
+def add_photo(request, content_id):
+      # photo-file will be the "name" attribute on the <input type="file">
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+      s3 = boto3.client('s3')
+      # need a unique "key" for S3 / needs image file extension too
+      key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+      # just in case something goes wrong
+      try:
+          bucket = os.environ['S3_BUCKET']
+          s3.upload_fileobj(photo_file, bucket, key)
+          # build the full url string
+          url = f"https://{bucket}.{os.environ['S3_BASE_URL']}{key}"
+          print(url)
+          # we can assign to content_id or content (if you have a content object)
+          Photo.objects.create(url=url, content_id=content_id)
+      except botocore.exceptions.ClientError as error:
+            print('An error occurred uploading file to S3')
+            # Put your error handling logic here
+            raise error
+      except botocore.exceptions.ParamValidationError as error:
+            raise ValueError('The parameters you provided are incorrect: {}'.format(error))
+      except:
+          print('An error occurred uploading file to S3')
+  return redirect('detail', content_id=content_id)
 
 
 #signup -auth-

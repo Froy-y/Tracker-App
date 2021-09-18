@@ -22,5 +22,50 @@
             </div>
         </div>
     </div>
+    <div class="col s6">
+        <form action="{% url 'add_entry' cont.id %}" method="post">
+            {% csrf_token %}{{ entry_form.as_p }}
+            <input type="submit" class="btn" value="Add Entry" />
+        </form>
+        <br />
+        {% if cont.entry_for_today %}
+        <div class="card-panel teal-text center-align">
+            {{cont.name}} DAMN YOURE BINGING TODAY!!
+        </div>
+        {% else %}
+        <div class="card-panel red-text center-align">
+            Bored? Let's watch some episodes!!
+        </div>
+        {% endif %}
+
+        <table class="striped">
+            {% if cont.entry_set.all %}
+                <thead>
+                    <th>Date</th>
+                    <th>Season</th>
+                    <th>Episode</th>
+                </thead>
+                <tbody>
+                    {% for entry in cont.entry_set.all %}
+                    <tr>
+                        <td>{{entry.date}}</td>
+                        <td>{{entry.season}}</td>
+                        <td>{{entry.episode}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
 </div>
+<script>
+    const dateEl = document.getElementById("id_date");
+    M.Datepicker.init(dateEl, {
+        format: "yyyy-mm-dd",
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true,
+    });
+
+</script>
 {% endblock %}

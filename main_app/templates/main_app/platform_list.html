@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Platform list to chose from!</h1>
+{% for platform in platform_list %}
+<div class="card">
+    <div class="card-content">
+        <p>Name: {{platform.name}}</p>
+    </div>
+</div>
+{% endfor %}{% endblock %}

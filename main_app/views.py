@@ -1,7 +1,9 @@
+from typing import List
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 
-from .models import Content, Entry
+from .models import Content, Entry, Platform
 from .forms import EntryForm, DeleteEntry
 
 # Create your views here.
@@ -58,7 +60,7 @@ def add_entry(request, content_id):
 
 # delete
 def delete_entry(request, content_id):
-    entry = Entry.objects.get(content_id=content_id)
+    entry = Entry.objects.filter(content_id=content_id)
     form = DeleteEntry(request.POST)
     if form.is_valid():
         entry.delete()
@@ -80,16 +82,23 @@ def delete_entry(request, content_id):
 
 #many to many -classes-
 #index
+class PlatformList(ListView):
+    model = Platform
 
 #detail (show)
 
+
 #create
+
 
 #associations
 #assoc
 
+
 #unassoc
 
+
 #photo -aws-
+
 
 #signup -auth-

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% block content %}
+<form action="" method="post">
+    {% if object %}
+        <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
+    {% else %}
+    <h1>Add Platform</h1>
+    {% endif %}
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit!" class="btn-large" />
+    <a href="{% url 'platform_list' %}" value="Submit!" class="btn-large">Back to Platforms</a>
+</form>
+{% endblock %}

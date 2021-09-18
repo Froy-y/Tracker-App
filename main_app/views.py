@@ -90,6 +90,14 @@ class PlatformDetail(DetailView):
     model = Platform
 
 #create
+class PlatformCreate(CreateView):
+    model = Platform
+    fields = '__all__'
+
+#update
+
+
+#delete
 
 
 #associations

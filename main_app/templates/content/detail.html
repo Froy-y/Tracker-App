@@ -78,6 +78,12 @@
                         <span>{{ plat.name }}</span>
                     </span>
                 </div>
+                <div class="card-action">
+                    <form action="{% url 'unassoc_platform' cont.id plat.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Remove</button>
+                    </form>
+                </div>
             </div>
             {% endfor %}
         {% else %}

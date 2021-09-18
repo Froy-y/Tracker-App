@@ -112,7 +112,9 @@ def assoc_platform(request, content_id, platform_id):
     return redirect('detail', content_id=content_id)
     
 #unassoc
-
+def unassoc_platform(request, content_id, platform_id):
+    Content.objects.get(id=content_id).platform.remove(platform_id)
+    return redirect('detail', content_id=content_id)    
 
 #photo -aws-
 

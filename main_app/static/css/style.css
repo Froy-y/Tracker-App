@@ -2,7 +2,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-image: url(../images/background-tv-2.jpg);
+    background-image: url(../images/silverwebp.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -16,4 +16,96 @@ main{
 footer.page-footer {
     padding-top: 0;
     text-align: right;
+}
+
+.navbar-fixed {
+    background-color: black;
+}
+
+.page-footer {
+    background-color: black;
+}
+
+.plus_sign {
+    font-size: large;
+}
+
+.as_p{
+    font-weight: bold;
+}
+
+label {
+    color: black;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+nav {
+    background-color: black;
+}
+
+.card {
+    background-color: rgb(0 0 0 / 20%)
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: black;
+}
+
+#uploadbtn {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+.card-content span {
+    font-size: 1.68rem;
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* home page */
+.home_list {
+    font-size: 35px;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+h6 {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+/* content index page */
+.indexCards {
+    color: black;
+    display: block;
+}
+
+#indexName {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.desc, .seasons {
+    font-size: 20px;
+    font-weight: initial;
+}
+
+/* platformName */
+.platformName {
+    font-size: 20px;
+    font-weight: bold;
 }

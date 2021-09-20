@@ -20,10 +20,6 @@ import botocore.exceptions
 def home(request):
     return render(request, 'home.html')
 
-#about
-def about(request):
-    return render(request, 'about.html')
-
 #index
 @login_required
 def content(request):

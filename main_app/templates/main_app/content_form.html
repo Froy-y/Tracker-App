@@ -3,7 +3,7 @@
 
 {% if object %}
     <h1>
-        Edit <span class="teal-text">{{ object.name }}!</span>
+        Edit <span class="white-text">{{ object.name }}!</span>
     </h1>
 {% else %}
     <h1>
@@ -11,17 +11,17 @@
     </h1>
 {% endif %}
 
-<form action="" method="post">
+<form action="" method="post" class="card-panel card">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
     </table>
     {% if object %}
-    <input type="submit" value="Submit!" class="btn-large">
+    <input type="submit" value="Submit!" class="waves-effect waves-light btn-flat card">
     {% else %}
-    <input type="submit" value="Submit!" class="btn-large">
+    <input type="submit" value="Submit!" class="waves-effect waves-light btn-flat card">
     {% endif %}
-    <a href="{% url 'content' %}" value="Submit!" class="btn-large">Back to Content</a>
+    <a href="{% url 'content' %}" value="Submit!" class="waves-effect waves-light btn-flat card">Back to Content</a>
 </form>
 
 {% endblock %}

@@ -5,6 +5,6 @@
 <form action="{% url 'signup' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="signup" class="btn">
+    <input type="submit" value="signup" class="waves-effect waves-light btn-flat card">
 </form>
 {% endblock %}

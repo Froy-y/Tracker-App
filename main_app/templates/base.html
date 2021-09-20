@@ -15,14 +15,15 @@
         <nav>
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Tracker</a></li>
+                    <li><a href="{% url 'home' %}" class="brand-logo center">&nbsp;&nbsp;Tracker</a></li>
                 </ul>
-                <ul class="right">
+                <ul class="left hide-on-med-and-down">
                     <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'content' %}">Content</a></li>
                     <li><a href="{% url 'content_create' %}">Add Content!</a></li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
                     <li><a href="{% url 'platform_list' %}">Platforms</a></li>
                     <li><a href="{% url 'platform_create' %}">Create a Platform</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>

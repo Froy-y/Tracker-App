@@ -2,16 +2,16 @@
 {% block content %}
 <h1>Content</h1>
 {% for cont in content_ %}
-<a href="{% url 'detail' cont.id %}">
-<div class="card">
+<a href="{% url 'detail' cont.id %}" class="indexCards waves-effect waves-light card">
+<div>
     <div class="card-content">
-        <span class="card-title">
+        <span class="card-title" id="indexName">
             {{cont.name}}
         </span>
-        <p>
+        <p class="desc">
             Description: {{cont.description}}
         </p>
-        <p>
+        <p class="seasons">
             Seasons: {{cont.seasons}}
         </p>
     </div>

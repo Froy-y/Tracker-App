@@ -1,7 +1,7 @@
+from botocore.retries import bucket
 from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from django.conf import settings
 
 from .models import Content, Entry, Platform, Photo
 from .forms import EntryForm, DeleteEntry
@@ -41,7 +41,7 @@ def content_detail(request, content_id):
 #create
 class ContentCreate(CreateView):
     model = Content
-    fields= '__all__'
+    fields= ['name', 'description', 'seasons']
 
 #update
 class ContentUpdate(UpdateView):
@@ -66,14 +66,14 @@ def add_entry(request, content_id):
     return redirect('detail', content_id=content_id)
 
 # delete
-def delete_entry(request, content_id):
+def delete_all_entry(request, content_id):
     entry = Entry.objects.filter(content_id=content_id)
     form = DeleteEntry(request.POST)
     if form.is_valid():
         entry.delete()
     return redirect('detail', content_id=content_id)
 
-# def delete_entry(request, content_id):
+# def delete_all_entry(request, content_id):
 #     entry = get_object_or_404(Entry, content_id=content_id)
 #     if request.method == "POST":
 #         form = DeleteEntry(request.POST, instance=entry)
@@ -130,6 +130,7 @@ def add_photo(request, content_id):
       s3 = boto3.client('s3')
       # need a unique "key" for S3 / needs image file extension too
       key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+      print(f"add photo key {photo_file}")
       # just in case something goes wrong
       try:
           bucket = os.environ['S3_BUCKET']
@@ -149,7 +150,40 @@ def add_photo(request, content_id):
           print('An error occurred uploading file to S3')
   return redirect('detail', content_id=content_id)
 
-#delete photo
+# def delete_photo(bucket, model, aws_secret, aws_key, content_id):
+#     try:
+#         aws_key = os.environ['AWS_ACCESS_KEY_ID']
+#         aws_secret = os.environ['AWS_SECRET_ACCESS_KEY']
+#         s3 = boto3.client(
+#             "s3", aws_access_key_id=aws_key, aws_secret_access_key=aws_secret
+#         )
+#         s3.delete_object(Bucket=bucket, Key=model)
+#         return True
+#     except Exception as ex:
+#         print(str(ex))
+#     return redirect('detail', content_id=content_id)
+
+# def delete_photo(request, content_id):
+#     aws_key = os.environ['AWS_ACCESS_KEY_ID']
+#     aws_secret = os.environ['AWS_SECRET_ACCESS_KEY']
+#     photo_file = request.FILES.get('photo-file', None)
+#     print(photo_file)
+#     try:
+#         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+#         print(f"delete photo key {key}")
+#         s3 = boto3.client(
+#             "s3", aws_key, aws_secret
+#         )
+#         bucket = os.environ['S3_BUCKET']
+#         url = f"https://{bucket}.{os.environ['S3_BASE_URL']}{key}"
+#         s3.delete_object(url=url, content_id=content_id)
+#     except Exception as ex:
+#         print(str(ex))
+#         print("ERROR", ex)
+#     return redirect('detail', content_id=content_id)
+        
+#signup -auth-
+# delete photo
 def delete_photo(request, content_id):
       # photo-file will be the "name" attribute on the <input type="file">
   photo_file = request.FILES.get('photo-file', None)
@@ -157,15 +191,17 @@ def delete_photo(request, content_id):
       s3 = boto3.client('s3')
       # need a unique "key" for S3 / needs image file extension too
       key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+      print(f"the photo key {key}")
       # just in case something goes wrong
       try:
           bucket = os.environ['S3_BUCKET']
-          s3.upload_fileobj(photo_file, bucket, key)
+          s3.delete_object(photo_file, bucket, key)
           # build the full url string
           url = f"https://{bucket}.{os.environ['S3_BASE_URL']}{key}"
           # we can assign to content_id or content (if you have a content object)
-          Photo.objects.get(url=url, content_id=content_id)
-          s3.Objects.delete(Bucket=bucket, Key=key, url=url, content_id=content_id)
+          Photo.objects.delete(url=url, content_id=content_id)
+          s3.delete_object(photo_file, bucket, key)
+        #   s3.Objects.delete(Bucket=bucket, Key=key, url=url, content_id=content_id)
       except botocore.exceptions.ClientError as error:
             print('An error occurred uploading file to S3')
             # Put your error handling logic here
@@ -175,4 +211,3 @@ def delete_photo(request, content_id):
       except:
           print('An error occurred uploading file to S3')
   return redirect('detail', content_id=content_id)
-#signup -auth-

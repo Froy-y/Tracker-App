@@ -23,26 +23,21 @@
         </div>
             {% for photo in cont.photo_set.all %}
             <img src="{{photo.url}}" class="responsive-img card-panel">
-            <form action="{% url 'delete_photo' cont.id %}" enctype="multipart/form-data" method="post">
-                {% csrf_token %}
-                <br><br>
+            {% comment %} <form action="{% url 'delete_photo' cont.id %}" enctype="multipart/form-data" method="post"> {% endcomment %}
+                {% comment %} {% csrf_token %} {% endcomment %}
+                {% comment %} <br><br> {% endcomment %}
                 <input type="submit" class="btn" value="Delete Photo">
-            </form>
+            {% comment %} </form> {% endcomment %}
             {% empty %}
             <div class="card-panel teal-text center-align">
                 No Photos Uploaded
             </div>
-            <form action="{% url 'delete_photo' cont.id %}" enctype="multipart/form-data" method="post" class="card-panel">
-                {% csrf_token %}
-                <br><br>
-                <input type="submit" class="btn" value="Delete Photo">
-            </form>
             {% endfor %}
             <form action="{% url 'add_photo' cont.id %}" enctype="multipart/form-data" method="post" class="card-panel">
                 {% csrf_token %}
                 <input type="file" name="photo-file">
                 <br><br>
-                <input type="submit" class="btn" value="Upload Photo">
+                <input type="submit" class="btn" value="Upload Photo" name="photo-file">
             </form>
     </div>
     <div class="col s6">
@@ -74,10 +69,6 @@
                             <td>{{entry.season}}</td>
                             <td>{{entry.episode}}
                             <div class="card-action">
-                                <form action="{% url 'delete_entry' cont.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn">Remove</button>
-                                </form>
                             </div>
                             </td>
                         </tr>
@@ -85,6 +76,12 @@
                 </tbody>
             {% endif %}
         </table>
+        <div class="card-action">
+            <form action="{% url 'delete_all_entry' cont.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn">Remove All Entries</button>
+            </form>
+        </div>
     </div>
 </div>
 <hr>

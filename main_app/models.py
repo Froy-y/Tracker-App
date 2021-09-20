@@ -1,6 +1,8 @@
+from botocore import model
 from django.db import models
 from django.urls import reverse
 from datetime import date
+from django.contrib.auth.models import User
 
 class Platform(models.Model):
     name = models.CharField(max_length=20)
@@ -18,6 +20,7 @@ class Content(models.Model):
     description = models.CharField(max_length=200)
     seasons = models.IntegerField()
     platform = models.ManyToManyField(Platform)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name

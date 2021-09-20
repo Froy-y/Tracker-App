@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <h1>Platform list to chose from!</h1>
-{% for platform in platform_ %}
+{% for platform in platform_list %}
 <a href="{% url 'platform_detail' platform.id %}">
 <div class="card">
     <div class="card-content">

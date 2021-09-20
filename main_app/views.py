@@ -104,12 +104,6 @@ def delete_all_entry(request, content_id):
 class PlatformList(LoginRequiredMixin, ListView):
     model = Platform
 
-    def platform_list(request):
-        platform_ = Platform.objects.filter(user=request.user)
-        return render(request, 'main_app/platform_list.html', {
-            'platform_': platform_
-        })
-
 #detail (show)
 class PlatformDetail(LoginRequiredMixin, DetailView):
     model = Platform

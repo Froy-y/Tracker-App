@@ -6,7 +6,7 @@ Created an app that helps you track your favorite Tv Shows!
 
 ## Code Snippet
 -These delete buttons TOOK ME OUT!!
-```
+``` Python
 #DELETE_PHOTO INSTANCE
 def delete_photo(bucket, model, aws_secret, aws_key, content_id):
     try:

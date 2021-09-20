@@ -7,7 +7,7 @@ Created an app that helps you track your favorite Tv Shows!
 ## Code Snippet
 -These delete buttons TOOK ME OUT!!
 ``` Python
-#DELETE_PHOTO INSTANCE
+#DELETE_PHOTO INSTANCE Attempt 1
 def delete_photo(bucket, model, aws_secret, aws_key, content_id):
     try:
         aws_key = os.environ['AWS_ACCESS_KEY_ID']
@@ -21,6 +21,7 @@ def delete_photo(bucket, model, aws_secret, aws_key, content_id):
         print(str(ex))
     return redirect('detail', content_id=content_id)
 
+#DELETE_PHOTO INSTANCE Attempt 2
 def delete_photo(request, content_id):
     aws_key = os.environ['AWS_ACCESS_KEY_ID']
     aws_secret = os.environ['AWS_SECRET_ACCESS_KEY']
